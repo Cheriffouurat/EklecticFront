@@ -1,0 +1,114 @@
+<c-card-body>
+
+
+  <c-card class="mb-4">
+    <c-card-header>
+      <strong>Tableau De Services</strong>
+    </c-card-header>
+    <br>
+    <div class="card-tools">
+
+
+      <c-button-group aria-label="Button group with nested dropdown" role="group">
+        <button cButton routerLink="/service/CreatService" color="primary">Creer</button>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <div class="text-center">
+        <c-dropdown variant="btn-group">
+
+
+          <button cButton cDropdownToggle>
+            Filtre
+          </button>
+          <ul cDropdownMenu>
+            <li><a cDropdownItem routerLink>Action</a></li>
+            <li><a cDropdownItem routerLink>Another action</a></li>
+            <li><a cDropdownItem routerLink>Something else here</a></li>
+            <li cDropdownDivider></li>
+            <li><a cDropdownItem routerLink>Separated link</a></li>
+          </ul>
+        </c-dropdown>
+        </div>
+
+      </c-button-group>
+    </div>
+
+    <br>
+
+    <div class="input-group input-group-sm" style="width: 150px;">
+      <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-default">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+    <br>
+    <table [striped]="true" cTable>
+      <thead cTableColor="light">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Image</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+
+
+      <tr *ngFor="let S of listservice">
+        <td>{{ S.idService }}</td>
+        <td>{{ S.nameService }}</td>
+        <td>{{ S.description }}</td>
+
+        <td>
+          <ng-container *ngIf="S.image">
+            <img [src]="S.image.imagenUrl" alt="image" width="80">
+            </ng-container>
+        </td>
+
+
+
+        <td><button type="button"  (click)="deleteSERV(S.idService)" class="btn btn-outline-danger">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+          </svg>
+
+          Supprimer
+        </button>
+          <button type="button" [routerLink]="['/service/ModifyService/',S.idService]" class="btn btn-success">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"></path>
+            </svg>
+            Modifier
+          </button>
+          <button type="button" [routerLink]="['/service/ImageService/',S.idService]" class="btn btn-success">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"></path>
+            </svg>
+            Télécharger image
+          </button>
+
+
+
+        </td>
+      </tr>
+
+
+      </tbody>
+    </table>
+
+  </c-card>
+
+
+  <!--  </app-docs-example>-->
+</c-card-body>

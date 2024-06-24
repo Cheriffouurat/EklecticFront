@@ -7,6 +7,32 @@ import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
 
+import {HomeFrontComponent} from "./FrontOffice/home-front/home-front.component";
+import {LoginsComponent} from "./FrontOffice/logins/logins.component";
+import {BackuserComponent} from "./FrontOffice/backuser/backuser.component";
+import {ModifyUserbackComponent} from "./FrontOffice/modify-userback/modify-userback.component";
+
+import {NavigateBarComponent} from "./FrontOffice/navigate-bar/navigate-bar.component";
+import {HomePageComponent} from "./FrontEnd/home-page/home-page.component";
+import {CategoriesPageComponent} from "./FrontEnd/categories-page/categories-page.component";
+import {ServicesPageComponent} from "./FrontEnd/services-page/services-page.component";
+import {ServiceDetailComponent} from "./FrontEnd/service-detail/service-detail.component";
+
+import {ConnexionComponent} from "./FrontEnd/connexion/connexion.component";
+import {ResetpwdComponent} from "./FrontEnd/resetpwd/resetpwd.component";
+import {InscriptionComponent} from "./FrontEnd/inscription/inscription.component";
+import {NavigationBarComponent} from "./FrontEnd/navigation-bar/navigation-bar.component";
+import {RpwdCodeComponent} from "./FrontEnd/rpwd-code/rpwd-code.component";
+import {
+  ServicePageParCategorieComponent
+} from "./FrontEnd/service-page-par-categorie/service-page-par-categorie.component";
+import {ServiceTypeService} from "./Service/service-type.service";
+import {ServicetypeParServiceComponent} from "./FrontEnd/servicetype-par-service/servicetype-par-service.component";
+import {ServiceTypeDeatilComponent} from "./FrontEnd/service-type-deatil/service-type-deatil.component";
+import {SimPaymentComponent} from "./FrontEnd/sim-payment/sim-payment.component";
+import {CallbackComponent} from "./FrontEnd/callback/callback.component";
+
+
 const routes: Routes = [
   {
     path: '',
@@ -25,6 +51,32 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
+      {
+        path: 'categorie',
+        loadChildren: () =>
+          import('./BackEnd/categorie/categorie.module').then((m) => m.CategorieModule)
+      },
+      {
+        path: 'service',
+        loadChildren: () =>
+          import('./BackEnd/service/service.module').then((m) => m.ServiceModule)
+      },
+      {
+        path: 'TypeService',
+        loadChildren: () =>
+          import('./BackEnd/service-type/service-type.module').then((m) => m.ServiceTypeModule)
+      },
+      {
+        path: 'Offres',
+        loadChildren: () =>
+          import('./BackEnd/offre/offre.module').then((m) => m.OffreModule)
+      },
+      {
+        path: 'user',
+        loadChildren: () =>
+          import('./BackEnd/user/user.module').then((m) => m.UserModule)
+      },
+
       {
         path: 'theme',
         loadChildren: () =>
@@ -60,6 +112,8 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/notifications/notifications.module').then((m) => m.NotificationsModule)
       },
+
+
       {
         path: 'widgets',
         loadChildren: () =>
@@ -100,6 +154,145 @@ const routes: Routes = [
       title: 'Register Page'
     }
   },
+
+
+  {
+    path: 'HomeFront',
+    component: HomeFrontComponent,
+    data: {
+      title: 'Home Page'
+    }
+  },
+  {
+    path: 'Auth',
+    component: LoginsComponent,
+    data: {
+      title: 'Login Page'
+    }
+  },
+  {
+    path: 'backuser',
+    component: BackuserComponent,
+    data: {
+      title: 'backuser Page'
+    }
+  },
+  {
+    path: 'modifyuser',
+    component: ModifyUserbackComponent,
+    data: {
+      title: 'modifyuser Page'
+    }
+  },
+
+  {
+    path: 'NavigateBar',
+    component: NavigateBarComponent,
+    data: {
+      title: 'NavigateBar Page'
+    }
+  },
+  {
+    path: 'HomePage',
+    component: HomePageComponent,
+    data: {
+      title: 'Home Page'
+    }
+  },
+  {
+    path: 'ServicesPage',
+    component: CategoriesPageComponent,
+    data: {
+      title: 'ServicesPage'
+    }
+  },
+  {
+    path: 'ServicesPageParCategorie/:id',
+    component: ServicePageParCategorieComponent,
+    data: {
+      title: 'ServicesPageParCategorie'
+    }
+  },
+  {
+    path: 'ServicesTypePage',
+    component: ServicesPageComponent,
+    data: {
+      title: 'ServicesT Page'
+    }
+  },
+  {
+    path: 'ServicetypeParService/:id',
+    component: ServicetypeParServiceComponent,
+    data: {
+      title: 'ServicetypeParService Page'
+    }
+  },
+  {
+    path: 'ServicetypeDetail/:id',
+    component: ServiceTypeDeatilComponent,
+    data: {
+      title: 'ServiceTypeDeatil Page'
+    }
+  },
+  {
+    path: 'service detail',
+    component: ServiceDetailComponent,
+    data: {
+      title: 'detail Page'
+    }
+  },
+
+  {
+    path: 'connexion',
+    component: ConnexionComponent,
+    data: {
+      title: 'connexion Page'
+    }
+  },
+  {
+    path: 'rpwd',
+    component: ResetpwdComponent,
+    data: {
+      title: 'rpwd Page'
+    }
+  },
+  {
+    path: 'newpassword',
+    component: RpwdCodeComponent,
+    data: {
+      title: ' RpwdCode Page'
+    }
+  },
+  {
+    path: 'inscripton',
+    component: InscriptionComponent,
+    data: {
+      title: 'inscripton Page'
+    }
+  },
+  {
+    path: 'SimPayment',
+    component: SimPaymentComponent,
+    data: {
+      title: 'SimPayment Page'
+    }
+  },
+  {
+    path: 'callback',
+    component: CallbackComponent,
+    data: {
+      title: 'SimPayment Page'
+    }
+  },
+  {
+    path: 'NavBar',
+    component:NavigationBarComponent,
+    data: {
+      title: 'NavBar Page'
+    }
+  },
+
+
   {path: '**', redirectTo: 'dashboard'}
 ];
 

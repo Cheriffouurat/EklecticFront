@@ -1,0 +1,99 @@
+<c-card-body>
+
+
+  <c-card class="mb-4">
+    <c-card-header>
+      <strong>Tableau</strong>
+    </c-card-header>
+    <br>
+    <div class="card-tools">
+
+
+      <c-button-group aria-label="Button group with nested dropdown" role="group">
+
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <div class="text-center">
+          <c-dropdown variant="btn-group">
+            <button cButton cDropdownToggle>
+              Filtrer
+            </button>
+            <ul cDropdownMenu>
+              <li><a cDropdownItem routerLink>Action</a></li>
+              <li><a cDropdownItem routerLink>Another action</a></li>
+              <li><a cDropdownItem routerLink>Something else here</a></li>
+              <li cDropdownDivider></li>
+              <li><a cDropdownItem routerLink>Separated link</a></li>
+            </ul>
+          </c-dropdown>
+        </div>
+      </c-button-group>
+    </div>
+
+    <br>
+
+    <div class="input-group input-group-sm" style="width: 150px;">
+      <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-default">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+    <br>
+    <table [striped]="true" cTable>
+      <thead cTableColor="light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Image</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+
+
+      <tr *ngFor="let S of listserviceType">
+        <td>{{ S.id }}</td>
+        <td>{{ S.nom }}</td>
+        <td>{{ S.prix }}</td>
+        <td>
+          <ng-container *ngIf="S.image">
+            <img [src]="S.image.imagenUrl"  alt="Image de la catégorie" width="80">
+          </ng-container>
+        </td>
+
+
+
+        <td>
+          <button type="button" [routerLink]="['/Offres/AjouterOffre/',S.id]" class="btn btn-success">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"></path>
+            </svg>
+            ajouter une offre
+
+          </button>
+
+
+
+
+        </td>
+      </tr>
+
+
+      </tbody>
+    </table>
+
+  </c-card>
+
+
+  <!--  </app-docs-example>-->
+</c-card-body>

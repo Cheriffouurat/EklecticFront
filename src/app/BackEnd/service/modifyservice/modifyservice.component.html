@@ -1,0 +1,55 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Modifier Un Service</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <div class="col-md-12 mb-3 mt-3">
+            <label for="fileInput" style="cursor: pointer;">
+              <img [src]="imageUrl" class="" width="200px" height="200px" />
+
+            </label>
+            <input id="fileInput" type="file" (change)="onFileSelected(event)" >
+          </div>
+          <div >
+            <button (click)="ModifierImage()" class="btn btn-primary">Modifier Image</button>
+          </div>
+
+          <form>
+            <div class="card-body">
+
+              <div class="form-group">
+                <label >Nom de service </label>
+                <input type="text" [(ngModel)]="service.nameService" name="Nom" class="form-control"  >
+              </div>
+              <div class="form-group">
+                <label >Description</label>
+                <input type="text" [(ngModel)]="service.description"  name="Description" class="form-control"  >
+              </div>
+              <div>
+                <label for="02" >Categorie</label>
+                <select id="02" name="marque"  [(ngModel)]="Categorieid">
+                  <option *ngFor="let C of listcategorie" [value]="C.idCategorie" >{{ C.name}}</option>
+                </select>
+              </div>
+
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+              <button (click)="ModifierService()" class="btn btn-primary">Modifier</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</section>
