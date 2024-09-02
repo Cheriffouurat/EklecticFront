@@ -1,5 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {CardBodyComponent, CardComponent, CardHeaderComponent} from "@coreui/angular";
+import {
+    ButtonCloseDirective,
+    ButtonDirective,
+    CardBodyComponent,
+    CardComponent,
+    CardHeaderComponent,
+    ModalBodyComponent,
+    ModalComponent,
+    ModalFooterComponent,
+    ModalHeaderComponent,
+    ModalTitleDirective
+} from "@coreui/angular";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ServService} from "../../../Service/serv.service";
 import {Router} from "@angular/router";
@@ -10,20 +21,28 @@ import {ServiceTypeService} from "../../../Service/service-type.service";
 import {ServicesType} from "../../../Model/ServicesType";
 import {Categorie} from "../../../Model/Categorie";
 import {ServiceTypeEnum, ServiceTypeEnumArray} from "../../../Model/ServiceTypeEnum";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'app-create-service-type',
   standalone: true,
-  imports: [
-    CardBodyComponent,
-    CardComponent,
-    CardHeaderComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    NgForOf
-  ],
+    imports: [
+        CardBodyComponent,
+        CardComponent,
+        CardHeaderComponent,
+        FormsModule,
+        ReactiveFormsModule,
+        NgForOf,
+        ButtonCloseDirective,
+        ButtonDirective,
+        ModalBodyComponent,
+        ModalComponent,
+        ModalFooterComponent,
+        ModalHeaderComponent,
+        ModalTitleDirective,
+        NgIf
+    ],
   templateUrl: './create-service-type.component.html',
   styleUrl: './create-service-type.component.scss'
 })
@@ -31,7 +50,9 @@ export class CreateServiceTypeComponent implements OnInit{
   listService!:Service[];
   serviceId!:number;
   ServiceType!:ServicesType;
-  Periode!:ServiceTypeEnum;
+  Periode!:ServiceTypeEnum
+  public liveDemoVisible = false;
+
 
   constructor(private consumerType:ServiceTypeService,private route:Router,private Service:ServService) { }
   ngOnInit() {
@@ -48,29 +69,33 @@ export class CreateServiceTypeComponent implements OnInit{
     });
 
   }
-
-  addServiceType(): void {
-
-
-          this.consumerType.AddServiceType(this.ServiceType,this.serviceId).subscribe(
-            () => {
-              this.route.navigateByUrl('/TypeService/ServicetypeBack');
-            },
-            (error) => {
-              console.log('Erreur lors de la création du service:', error);
-            }
-          );
-
+  confirmAddServiceType() {
+    this.toggleLiveDemo();
   }
 
+  // Méthode pour soumettre le type de service après confirmation
+  submitServiceType() {
+    this.consumerType.AddServiceType(this.ServiceType, this.serviceId).subscribe(
+      () => {
+        console.log('Service Type créé avec succès !');
+        this.route.navigateByUrl('/TypeService/ServicetypeBack');
+        this.toggleLiveDemo(); // Fermer le modal après soumission
+      },
+      (error) => {
+        console.log('Erreur lors de la création du service:', error);
+      }
+    );
+  }
 
+  toggleLiveDemo() {
+    this.liveDemoVisible = !this.liveDemoVisible;
+    console.log(this.liveDemoVisible);
+  }
 
-
-
-
-
-
-
+  handleLiveDemoChange(event: boolean) {
+    this.liveDemoVisible = event;
+    console.log(this.liveDemoVisible);
+  }
 
 
   protected readonly Object = Object;

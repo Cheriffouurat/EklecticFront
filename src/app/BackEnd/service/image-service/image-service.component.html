@@ -8,18 +8,34 @@
           <div class="card-header">
             <h3 class="card-title">Telecharger Image</h3>
           </div>
-          <!-- /.card-header -->
-          <!-- form start -->
+          <div *ngIf="visible[1]" class="alert-container">
+            <c-alert
+              color="success"
+              [dismissible]="dismissible"
+              (visibleChange)="onAlertVisibleChange($event)"
+              fade
+              variant="solid"
+            >
+              <ng-template [ngIf]="dismissible" cTemplateId="alertButtonCloseTemplate">
+                <button (click)="visible[1]=false" cButtonClose white></button>
+              </ng-template>
+              <h4 cAlertHeading>Image ajoutée avec succès!</h4>
+              <p>L'image a été ajoutée avec succès à votre service. Vous pouvez maintenant la visualiser dans la liste des images associées.</p>
+              <hr />
+              <p class="mb-0">N'hésitez pas à ajouter d'autres images ou à revenir à la liste des services.</p>
+            </c-alert>
+          </div>->
           <form>
             <div class="col-md-12 mb-3 mt-3">
               <label for="fileInput" style="cursor: pointer;">
                 <img [src]="imageUrl" class="" width="200px" height="200px" />
 
               </label>
-              <input id="fileInput" type="file" (change)="addImageToService()" >
+              <input id="fileInput" type="file" (change)="onFileSelected($event)"  >
             </div>
             </form>
-        </div>
+
+          </div>
         <!-- /.card -->
       </div>
     </div>

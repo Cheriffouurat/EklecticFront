@@ -31,6 +31,10 @@ import {ServicetypeParServiceComponent} from "./FrontEnd/servicetype-par-service
 import {ServiceTypeDeatilComponent} from "./FrontEnd/service-type-deatil/service-type-deatil.component";
 import {SimPaymentComponent} from "./FrontEnd/sim-payment/sim-payment.component";
 import {CallbackComponent} from "./FrontEnd/callback/callback.component";
+import {AuthGuardService} from "./Service/auth-guard.service";
+import {UnauthorizedComponent} from "./FrontEnd/unauthorized/unauthorized.component";
+import {ProfileComponent} from "./FrontEnd/profile/profile.component";
+import {AjouterUSERComponent} from "./BackEnd/user/ajouter-user/ajouter-user.component";
 
 
 const routes: Routes = [
@@ -49,32 +53,43 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule), canActivate: [AuthGuardService],
+        data: { expectedRole: 'ADMIN' }
       },
       {
         path: 'categorie',
         loadChildren: () =>
-          import('./BackEnd/categorie/categorie.module').then((m) => m.CategorieModule)
+          import('./BackEnd/categorie/categorie.module').then((m) => m.CategorieModule), canActivate: [AuthGuardService],
+        data: { expectedRole: 'ADMIN' }
+
       },
       {
         path: 'service',
         loadChildren: () =>
-          import('./BackEnd/service/service.module').then((m) => m.ServiceModule)
+          import('./BackEnd/service/service.module').then((m) => m.ServiceModule), canActivate: [AuthGuardService],
+        data: { expectedRole: 'ADMIN' }
+
       },
       {
         path: 'TypeService',
         loadChildren: () =>
-          import('./BackEnd/service-type/service-type.module').then((m) => m.ServiceTypeModule)
+          import('./BackEnd/service-type/service-type.module').then((m) => m.ServiceTypeModule), canActivate: [AuthGuardService],
+        data: { expectedRole: 'ADMIN' }
+
       },
       {
         path: 'Offres',
         loadChildren: () =>
-          import('./BackEnd/offre/offre.module').then((m) => m.OffreModule)
+          import('./BackEnd/offre/offre.module').then((m) => m.OffreModule), canActivate: [AuthGuardService],
+        data: { expectedRole: 'ADMIN' }
+
       },
       {
         path: 'user',
         loadChildren: () =>
-          import('./BackEnd/user/user.module').then((m) => m.UserModule)
+          import('./BackEnd/user/user.module').then((m) => m.UserModule), canActivate: [AuthGuardService],
+        data: { expectedRole: 'ADMIN' }
+
       },
 
       {
@@ -140,13 +155,13 @@ const routes: Routes = [
       title: 'Page 500'
     }
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-    data: {
-      title: 'Login Page'
-    }
-  },
+  // {
+  //   path: 'login',
+  //   component: LoginComponent,
+  //   data: {
+  //     title: 'Login Page'
+  //   }
+  // },
   {
     path: 'register',
     component: RegisterComponent,
@@ -285,27 +300,44 @@ const routes: Routes = [
     }
   },
   {
+    path: 'profile',
+    component: ProfileComponent,
+    data: {
+      title: 'profile Page'
+    }
+  },
+  {
+    path: 'ajouter',
+    component: AjouterUSERComponent,
+    data: {
+      title: 'ajouter user'
+    }
+  },
+  {
     path: 'NavBar',
     component:NavigationBarComponent,
     data: {
       title: 'NavBar Page'
     }
   },
+    { path: 'unauthorized', component: UnauthorizedComponent },
+  { path: '**', redirectTo: 'HomePage' },
+  { path: '', redirectTo: 'HomePage', pathMatch: 'full' },
 
 
-  {path: '**', redirectTo: 'dashboard'}
+
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {
+     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'top',
-      anchorScrolling: 'enabled',
-      initialNavigation: 'enabledBlocking'
-      // relativeLinkResolution: 'legacy'
-    })
-  ],
-  exports: [RouterModule]
+       anchorScrolling: 'enabled',
+       initialNavigation: 'enabledBlocking',
+        // relativeLinkResolution: 'legacy',
+     })
+   ],
+   exports: [RouterModule]
 })
 export class AppRoutingModule {
 }

@@ -34,8 +34,22 @@
           <input type="checkbox" class="form-check-input" id="exampleCheck1">
           <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
-        <button type="submit" (click)="addService()"  class="btn btn-primary">Submit</button>
+        <button type="submit" (click)="confirmAddService()"  class="btn btn-primary">Submit</button>
       </form>
+      <div *ngIf="liveDemoVisible">
+
+        <c-modal id="liveDemoModal" [visible]="liveDemoVisible" (visibleChange)="handleLiveDemoChange($event)">
+          <c-modal-header>
+            <h5 cModalTitle>Confirmer la soumission</h5>
+            <button (click)="toggleLiveDemo()" cButtonClose></button>
+          </c-modal-header>
+          <c-modal-body>Etes-vous sûr de vouloir soumettre ce Service?</c-modal-body>
+          <c-modal-footer>
+            <button (click)="toggleLiveDemo()" cButton color="secondary">Anuller</button>
+            <button (click)="submitService()" cButton color="primary">Enregistrer</button>
+          </c-modal-footer>
+        </c-modal>
+      </div>
     </div>
 
     <br>

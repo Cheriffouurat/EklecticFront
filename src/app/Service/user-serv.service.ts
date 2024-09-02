@@ -21,7 +21,7 @@ export class UserServService {
   }
 
   modifyUser(user:Utilisateur){
-    return this._http.put(`http://localhost:8188/SpringMVC/user/update`,user);
+    return this._http.put(`http://localhost:8086/ekProject/User/ModifyUser`,user);
   }
 
 
@@ -38,7 +38,6 @@ export class UserServService {
     return this._http.post('http://localhost:8086/ekProject/api/v1/auth/resetPassword', resetPassword);
   }
 
-  // http://localhost:8086/ekProject/api/v1/auth/register
 
   register(utilisateur: Utilisateur): Observable<any> {
     const serializedUser = JSON.stringify(utilisateur);
@@ -48,10 +47,22 @@ export class UserServService {
     return this._http.post<any>("http://localhost:8086/ekProject/api/v1/auth/register", serializedUser, { headers });
   }
 
+  registerOauth2(tel: string): Observable<any> {
 
 
+    return this._http.get("http://localhost:8086/ekProject/api/v1/auth/Oauth2Registration/"+tel);
+  }
 
+  registerAdmin(utilisateur: Utilisateur, token: string): Observable<string> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
 
-
-
+    return this._http.post<string>("http://localhost:8086/ekProject/User/registerAdmin", utilisateur, { headers });
+  }
 }
+
+
+
+

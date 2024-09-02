@@ -1,0 +1,70 @@
+<c-card-body>
+  <c-card class="mb-4">
+    <c-card-header>
+      <strong>Angular Modal</strong>
+    </c-card-header>
+    <br>
+    <div>
+      <form cForm>
+      <div class="form-group">
+        <div class="col-md-4 mb-3">
+          <label cLabel for="username">Nom d'utilisateur</label>
+          <input cFormControl name="username" [(ngModel)]="User.username" id="username" placeholder="Nom d'utilisateur" required>
+        </div>
+      </div>
+
+
+
+      <!-- Email -->
+      <div class="form-group">
+        <div class="col-md-4 mb-3">
+          <label cLabel for="inputEmail-1">Email address</label>
+          <input cFormControl name="email" [(ngModel)]="User.email" id="inputEmail-1" placeholder="Email" required>
+        </div>
+      </div>
+        <div class="form-group">
+          <div class="col-md-4 mb-3">
+            <label cLabel for="tel">Nom d'utilisateur</label>
+            <input cFormControl name="tel" [(ngModel)]="User.phonenumber" id="tel" pattern="^[0-9]{8}$" placeholder="Numéro de telephone" required>
+          </div>
+        </div>
+
+      <!-- Numéro de téléphone -->
+      <div class="form-group">
+        <div class="col-md-4 mb-3">
+          <label cLabel for="inputPassword-1">Password</label>
+          <input cFormControl [type]="'password'" name="password" [(ngModel)]="User.password" id="inputPassword-1" placeholder="Mot de passe" required>
+        </div>
+      </div>
+
+        <div class="form-group">
+          <div class="col-md-4 mb-3">
+            <label cLabel for="roleSelect">Rôle</label>
+            <select cSelect  name="role" [(ngModel)]="User.role" id="roleSelect" class="form-control" required>
+              <option value="" disabled selected>Choisissez un rôle</option>
+              <option *ngFor="let role of roles" [value]="role.value">{{ role.name }}</option>
+            </select>
+          </div>
+        </div>
+
+      <!-- Bouton Soumettre -->
+      <button type="button" (click)="registerAdmin()" class="btn btn-primary mt-3">Ajouter</button>
+      </form>
+      <!-- Modal pour confirmation -->
+<!--      <div *ngIf="liveDemoVisible">-->
+<!--        <c-modal id="liveDemoModal" [visible]="liveDemoVisible" (visibleChange)="handleLiveDemoChange($event)">-->
+<!--          <c-modal-header>-->
+<!--            <h5 cModalTitle>Confirmer la soumission</h5>-->
+<!--            <button (click)="toggleLiveDemo()" cButtonClose></button>-->
+<!--          </c-modal-header>-->
+<!--          <c-modal-body>Etes-vous sûr de vouloir soumettre cette catégorie?</c-modal-body>-->
+<!--          <c-modal-footer>-->
+<!--            <button (click)="toggleLiveDemo()" cButton color="secondary">Annuler</button>-->
+<!--            <button (click)="submitCategorie()" cButton color="primary">Enregistrer</button>-->
+<!--          </c-modal-footer>-->
+<!--        </c-modal>-->
+<!--      </div>-->
+<!--      window.location.assign("/login")-->
+    </div>
+  </c-card>
+</c-card-body>

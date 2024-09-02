@@ -4,7 +4,8 @@ import {Router, RouterLink} from "@angular/router";
 import {UserServService} from "../../Service/user-serv.service";
 import {Utilisateur} from "../../Model/Utilisateur";
 import {HttpHeaders} from "@angular/common/http";
-import {NgClass} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
+import {AuthServiceService} from "../../Service/auth-service-.service";
 
 @Component({
   selector: 'app-inscription',
@@ -13,7 +14,8 @@ import {NgClass} from "@angular/common";
     FormsModule,
     ReactiveFormsModule,
     RouterLink,
-    NgClass
+    NgClass,
+    NgIf
   ],
   templateUrl: './inscription.component.html',
   styleUrl: './inscription.component.scss'
@@ -21,28 +23,40 @@ import {NgClass} from "@angular/common";
 export class InscriptionComponent {
   defaultValue: string = "Valeur par défaut";
   // User: { Username: string,email: string,Phonenumber: string, Password: string } = {  Username: '',email: '', Phonenumber: '' ,Password: ''};
+  errorMessage: string;
 
      User:Utilisateur=new Utilisateur();
-  constructor(private _service:UserServService, private router:Router) {
-
+  constructor(private _service:UserServService, private router:Router,private authService:AuthServiceService) {
+    this.errorMessage = '';
   }
+   msisdn: string = '123';
   ngOnInit(): void {
+    this.authService.registerOauth2(this.msisdn).subscribe({
+      next: response => {
+        console.log('Utilisateur enregistré avec succès:', response);
+      },
+      error: error => {
+        console.error('Erreur lors de l\'enregistrement:', error);
+      }
+    });
   }
+
 
   registerUtilisateur(): void {
-    // Check if the form is valid
-
-
-      this._service.register(this.User).subscribe({
+    this._service.register(this.User).subscribe({
       next: response => {
         this.router.navigate(['/connexion']);
       },
       error: err => {
-        // Traitement en cas d'erreur
+        // Check if the error status is 409 (Conflict)
+        if (err.status === 409) {
+          // Display the error message from the backend
+          this.errorMessage = err.error;
+        } else {
+          // Handle other errors
+          this.errorMessage = 'Une erreur s\'est produite lors de l\'enregistrement.';
+        }
         console.error('Erreur lors de l\'enregistrement de l\'utilisateur :', err);
-        console.log('Error Response:', err.error);
-        console.log("mot de passe",this.User.password)
-
       }
     });
   }

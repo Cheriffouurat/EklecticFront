@@ -12,7 +12,14 @@
           <div class="col-md-4 mb-3">
             <label for="validationCustom01">Nom de Type de Service </label>
             <input type="text" name="nom" [(ngModel)]="ServiceType.nom" class="form-control" id="validationCustom01" placeholder=" Nom de Type de Service " >
-
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="validationCustom01">Description de Type de Service </label>
+            <input type="text" name="Description" [(ngModel)]="ServiceType.description" class="form-control" id="validationCustom78" placeholder="Description de Type de Service" >
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="validationCustom01">gateway de Type de Service </label>
+            <input type="text" name="gateway" [(ngModel)]="ServiceType.gateway" class="form-control" id="validationCustom98" placeholder="gateway" >
           </div>
         </div>
         <div class="form-group">
@@ -40,8 +47,22 @@
           <input type="checkbox" class="form-check-input" id="exampleCheck1">
           <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
-        <button type="submit" (click)="addServiceType()"  class="btn btn-primary">Submit</button>
+        <button type="submit" (click)="confirmAddServiceType()"  class="btn btn-primary">Submit</button>
       </form>
+      <div *ngIf="liveDemoVisible">
+
+        <c-modal id="liveDemoModal" [visible]="liveDemoVisible" (visibleChange)="handleLiveDemoChange($event)">
+          <c-modal-header>
+            <h5 cModalTitle>Confirmer la soumission</h5>
+            <button (click)="toggleLiveDemo()" cButtonClose></button>
+          </c-modal-header>
+          <c-modal-body>Etes-vous sûr de vouloir soumettre ce Type de Service?</c-modal-body>
+          <c-modal-footer>
+            <button (click)="toggleLiveDemo()" cButton color="secondary">Anuller</button>
+            <button (click)="submitServiceType()" cButton color="primary">Enregistrer</button>
+          </c-modal-footer>
+        </c-modal>
+      </div>
     </div>
 
     <br>

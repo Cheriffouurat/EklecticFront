@@ -4,6 +4,7 @@ import {ServicebackComponent} from "../service/serviceback/serviceback.component
 import {CreateServiceComponent} from "../service/create-service/create-service.component";
 import {UserbackComponent} from "./userback/userback.component";
 import {ModifyUserbackComponent} from "../../FrontOffice/modify-userback/modify-userback.component";
+import {AjouterUSERComponent} from "./ajouter-user/ajouter-user.component";
 
 const routes: Routes = [
   {
@@ -25,6 +26,13 @@ const routes: Routes = [
         component: ModifyUserbackComponent,
         data: {
           title: 'ModifyUser'
+        }
+      },
+      {
+        path: 'AjouterUser',
+        component: AjouterUSERComponent,
+        data: {
+          title: 'Ajouter User'
         }
       }
     ]

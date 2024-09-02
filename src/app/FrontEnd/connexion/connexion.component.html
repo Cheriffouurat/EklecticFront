@@ -152,7 +152,7 @@
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
           <div class="bg-gradient-info shadow-info border-radius-lg py-3 pe-1 text-center py-4">
             <h4 class="font-weight-bolder text-white mt-1">Sign In</h4>
-            <p class="mb-1 text-sm text-white">Enter your email and password to Sign In</p>
+            <p class="mb-1 text-sm text-white">Connectez-vous à votre compte</p>
           </div>
         </div>
         <div class="card-body">
@@ -163,24 +163,21 @@
             </div>
             <div class="input-group input-group-static mb-4">
               <label>Password</label>
-              <input type="text"  class="form-control" id="password" [(ngModel)]="auth.password" name="password" placeholder="•••••••••••••">
+              <input type="password"  class="form-control" id="password" [(ngModel)]="auth.password" autocomplete="off" name="password" placeholder="•••••••••••••">
             </div>
-
             <div class="text-center">
               <button  type="button" (click)="login()" class="btn bg-gradient-info w-100 mt-4 mb-2">Sign in</button>
             </div>
           </form>
         </div>
-
-
-
         <div class="card-footer text-center pt-0 px-lg-2 px-1">
           <div class="row mt-3">
-              <p class="mb-4 text-sm mx-auto">
+            <p class="mb-1 text-sm mx-auto">
                 ou se connecter avec
               </p>
             <div class="text-center">
-              <button  type="button"   class="btn bg-gradient-info w-100 mt-4 mb-2">Numero de telephone</button>
+              <button  type="button" id="oauth-button" (click)="loginWithOAuth2()"  class="btn bg-gradient-info w-100 mt-4 mb-2">  Numero de telephone</button>
+
             </div>
           </div>
           <p class="mb-4 text-sm mx-auto">

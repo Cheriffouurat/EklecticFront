@@ -61,6 +61,12 @@ export class ServiceTypeService {
 
     return this.Http.put('http://localhost:8086/ekProject/ServicesType/addImageAndAssigToServiceType/' + idService, data);
   }
+  ModifierAjouterImage(idService: number, image: File): Observable<any> {
+    const data: FormData = new FormData();
+    data.append('image', image);
+
+    return this.Http.put("http://localhost:8086/ekProject/ServicesType/AjouterModifierImage/" + idService, data);
+  }
 
   Allimage() {
     return this.Http.get<Image[]>("http://localhost:8086/ekProject/Service/getALLImage")

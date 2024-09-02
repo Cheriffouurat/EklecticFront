@@ -63,6 +63,7 @@ export const navItems: INavData[] = [
         name: 'Utilisateur',
         url: '/user/Utilisateur'
       },
+      
 
     ]
   },
@@ -80,6 +81,33 @@ export const navItems: INavData[] = [
         url: '/Offres/ActiverOffre'
       },
 
+    ]
+  },
+  {
+    name: 'Notifications',
+    url: '/notifications',
+    iconComponent: { name: 'cil-bell' },
+    children: [
+      {
+        name: 'Alerts',
+        url: '/notifications/alerts',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Badges',
+        url: '/notifications/badges',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Modal',
+        url: '/notifications/modal',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Toast',
+        url: '/notifications/toasts',
+        icon: 'nav-icon-bullet'
+      }
     ]
   },
 

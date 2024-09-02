@@ -181,76 +181,61 @@
   <section class="pt-7 pb-0">
     <div class="container">
       <div class="row">
-        <div *ngFor="let ST of serviceType" class="col-lg-4 col-md-6">
+        <div *ngFor="let ST of pagedItems" class="col-lg-4 col-md-6">
           <div class="card mt-5 mt-md-0">
             <div class="card-header p-0 mx-3 mt-n4 position-relative z-index-2">
               <a class="d-block blur-shadow-image">
                 <ng-container *ngIf="ST.image">
-
-                  <img [src]="ST.image.imagenUrl" [routerLink]="['/ServicetypeDetail',ST.id]"  alt="img-blur-shadow" class="img-fluid border-radius-lg" loading="lazy" style="width: 270px; height:  50%;">
+                  <img [src]="ST.image.imagenUrl" [routerLink]="['/ServicetypeDetail', ST.id]" alt="img-blur-shadow" class="img-fluid border-radius-lg" loading="lazy" style="width: 270px; height: 50%;">
                 </ng-container>
               </a>
             </div>
             <div class="card-body pt-3">
               <p class="text-dark mb-2 text-sm"></p>
               <a href="javascript:;">
-                <h5>
-                  {{ST.nom}}
-                </h5>
+                <h5>{{ ST.nom }}</h5>
               </a>
               <a href="javascript:;">
-                <h5>
-                 Durée: {{ST.periode}}
-                </h5>
+                <h5>Durée: {{ ST.periode }}</h5>
               </a>
 
-<!--              <div *ngIf="aUnePromotion(ST)">-->
-<!--                <div style="text-decoration: line-through;">Prix initial: {{ ST.prix }}DT</div>-->
-<!--                <h6>Prix Apres promotion: {{ ST.prixApresOffer }}DT</h6>-->
-<!--              </div>-->
-<!--              <div *ngIf="!aUnePromotion(ST)">-->
-<!--                <h6>Prix initial: {{ ST.prix }}DT</h6>-->
-<!--              </div>-->
-              <button type="button" class="btn btn-sm bg-gradient-info mb-0">S'abonner</button>
+              <div *ngIf="aUnePromotion(ST)">
+                <div style="text-decoration: line-through;">Prix initial: {{ ST.prix }}DT</div>
+                <h6>Prix Après promotion: {{ ST.prixApresOffer }}DT</h6>
+              </div>
+              <div *ngIf="!aUnePromotion(ST)">
+                <h6>Prix initial: {{ ST.prix }}DT</h6>
+              </div>
+              <a *ngIf="ST.id === specialServiceId"
+                 (click)="loginWithOAuth2()"
+                 class="btn btn-sm bg-gradient-info mb-0">
+                S'abonner
+              </a>
+
+              <!-- Sinon, afficher le lien normal -->
+              <a *ngIf="ST.id !== specialServiceId"
+                 [href]="ST.gateway"
+                 target="_blank"
+                 class="btn btn-sm bg-gradient-info mb-0">
+                S'abonner
+              </a>
               <span class="mx-2"></span>
               <button type="button" class="btn btn-sm bg-gradient-info mb-0">Votre</button>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="col-sm-7 ms-auto text-end">
-          <ul class="pagination pagination-primary mt-4">
-            <li class="page-item ms-auto">
-              <a class="page-link" href="javascript:;" aria-label="Previous">
-                <span aria-hidden="true"><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
-              </a>
-            </li>
-            <li class="page-item active">
-              <a class="page-link" href="javascript:;">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="javascript:;">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="javascript:;">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="javascript:;">4</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="javascript:;">5</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="javascript:;" aria-label="Next">
-                <span aria-hidden="true"><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
-              </a>
-            </li>
-          </ul>
-        </div>
+      <!-- Contrôles de pagination circulaire -->
+      <div class="pagination-controls">
+        <button (click)="setPage(p - 1)" [disabled]="p === 1" class="pagination-button">‹</button>
+        <button *ngFor="let page of pages" (click)="setPage(page)" [ngClass]="{'current-page': page === p}" class="pagination-button">
+          {{ page }}
+        </button>
+        <button (click)="setPage(p + 1)" [disabled]="p === totalPages" class="pagination-button">›</button>
       </div>
     </div>
   </section>
-
 
 </div>
 <footer class="footer pt-5 mt-5">

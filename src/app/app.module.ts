@@ -1,9 +1,12 @@
-import { NgModule } from '@angular/core';
-import {CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { ToastModule } from '@coreui/angular';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
 // Import routing module
@@ -15,6 +18,10 @@ import { AppComponent } from './app.component';
 // Import containers
 import { DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent } from './containers';
 
+// Import custom components
+import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component'; // Composant de notification
+
+// Import CoreUI modules
 import {
   AvatarModule,
   BadgeModule,
@@ -36,9 +43,12 @@ import {
   UtilitiesModule
 } from '@coreui/angular';
 
-import { IconModule, IconSetService } from '@coreui/icons-angular';
-import {HttpClientModule} from "@angular/common/http";
+import {IconModule, IconSetService} from '@coreui/icons-angular';
 import { AuthConfigModule } from './auth-config.module';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
+import {NgxPaginationModule} from "ngx-pagination";
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -47,11 +57,22 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS],
+  declarations: [
+    AppComponent,
+    ...APP_CONTAINERS,
+    NotificationDialogComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatDialogModule,
+    MatButtonModule,
+    NgScrollbarModule,
     AvatarModule,
     BreadcrumbModule,
     FooterModule,
@@ -65,21 +86,19 @@ const APP_CONTAINERS = [
     FormModule,
     UtilitiesModule,
     ButtonGroupModule,
-    ReactiveFormsModule,
-    SidebarModule,
     SharedModule,
     TabsModule,
     ListGroupModule,
     ProgressModule,
     BadgeModule,
-    ListGroupModule,
     CardModule,
-    CommonModule,
-    FormsModule,
-    HttpClientModule,
-
-    NgScrollbarModule,
-      AuthConfigModule
+    AuthConfigModule,
+    BrowserModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    NgxPaginationModule,
+    ToastModule
   ],
   providers: [
     {
@@ -89,7 +108,9 @@ const APP_CONTAINERS = [
     IconSetService,
     Title
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    NotificationDialogComponent
+  ]
 })
-export class AppModule {
-}
+export class AppModule { }

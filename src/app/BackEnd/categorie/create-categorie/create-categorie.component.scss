@@ -1,0 +1,10 @@
+c-card-body {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Styles pour centrer le dialog */
+.custom-dialog-container .mat-dialog-container {
+  max-width: 90vw;
+  max-height: 90vh;
+}

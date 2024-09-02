@@ -8,6 +8,7 @@ import {UserServService} from "../../Service/user-serv.service";
 import {Role} from "../../Model/Role";
 import {Utilisateur} from "../../Model/Utilisateur";
 import {AuthServiceService} from "../../Service/auth-service-.service";
+import {TokenResponse} from "angular-oauth2-oidc";
 @Component({
   selector: 'app-connexion',
   standalone: true,
@@ -44,7 +45,7 @@ export class ConnexionComponent {
         localStorage.setItem('token', data.access_token); // Stocker le jeton dans le local storage
 
         const token = localStorage.getItem('token'); // Récupérer le jeton depuis le local storage
-
+console.log("token",token)
         if (token) {
           let decodedToken: any = jwtDecode(token); // Utiliser 'any' pour le type du token décodé
 
@@ -99,10 +100,18 @@ export class ConnexionComponent {
     });
   }
 
-  // login2() {
-  //   this.authService.login();
-  // }
-}
 
+  loginWithOAuth2() {
+    const clientId = '41e1c5f4-11fe-11ef-9519-fa163e649851';
+    const redirectUri = encodeURIComponent('http://localhost:4200/#/HomePage');
+    const responseType = 'code';
+    const scope = 'SENDBOX';
+    const authorizationUri = 'https://payment.eklectic.tn/API/oauth/user/authorize';
+
+    const authorizationUrl = `${authorizationUri}?response_type=${responseType}&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+
+    window.location.href = authorizationUrl;
+  }
+}
 
 
